@@ -1,8 +1,5 @@
 import pandas as pd
-
-df_house = pd.read_csv('./data/clean_house.csv')
-df_app = pd.read_csv('./data/clean_house.csv')
-
+import os
 
 def dtype_conversions(df):
     # List of columns to convert to integer
@@ -30,6 +27,17 @@ def drop_unnecessary_columns_app(df):
     app_columns_to_drop = ['surface_of_good']
     df.drop(app_columns_to_drop, axis=1, inplace=True)
     return df
+
+
+# Get the current directory
+current_dir = os.getcwd()
+
+# Define the file paths relative to the parent directory using os.path.join
+clean_huis_te_koop_path = os.path.join(current_dir, "data", "clean_house.csv")
+clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv")
+
+df_house = pd.read_csv(clean_huis_te_koop_path, sep=",")
+df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
 
 
 print("--- Data type conversions of the house and app dataset ---")

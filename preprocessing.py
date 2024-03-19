@@ -1,56 +1,27 @@
 import pandas as pd
-import os
+import numpy as np
+from sklearn.impute import SimpleImputer
 
-def dtype_conversions(df):
-    # List of columns to convert to integer
-    columns_to_convert = ['number_of_rooms', 'living_area', 'fully_equipped_kitchen', 'furnished', 
-                      'terrace', 'terrace_area', 'garden', 'garden_area', 'surface_of_good', 
-                      'number_of_facades', 'swimming_pool']
+def preprocessing(df):
+    """ imputes missing values for swimmingpool -> they get filled up with """    
+    # _____imputing missing values for swimmingpool____
+    # Define the imputer to replace missing values with 0.0
+    constant_imputer = SimpleImputer(missing_values=np.nan, strategy='constant', fill_value=0.0)
+    # Define the column containing missing values
+    columns_with_missing_values = ['swimming_pool']
+    # Impute missing values in X_train
+    df[columns_with_missing_values] = constant_imputer.fit_transform(df[columns_with_missing_values])
 
-    # Convert specified columns to integer type
-    df[columns_to_convert] = df[columns_to_convert].apply(pd.to_numeric, errors='coerce').fillna(pd.NA)
-    df[columns_to_convert] = df[columns_to_convert].astype('Int64')
+    # _____one-hot encoding for kitchen_type____
+    df = pd.get_dummies(df, columns=["kitchen_type"], prefix="kitchen_type")
+
+    # _____one-hot encoding for state_of_building____
+    df = pd.get_dummies(df, columns=["state_of_building"], prefix="state_of_building")
+
+    # _____one-hot encoding for property_subtype____
+    df = pd.get_dummies(df, columns=["property_subtype"], prefix="property_subtype")
+
+    # _____one-hot encoding for province____
+    df = pd.get_dummies(df, columns=["province"], prefix="province")
+
     return df
-
-
-def drop_unnecessary_columns(df):
-    """ This function drops unwanted columns from the dataset for both houses and apartments"""
-    # List of columns to drop
-    columns_to_drop = ['property_id', 'latitude', 'longitude', 'property_type', 'type_of_sale']
-    df.drop(columns_to_drop, axis=1, inplace=True)
-    return df
-
-
-def drop_unnecessary_columns_app(df):
-    """ This function drops unwanted columns from the dataset for apartments"""
-    # List of columns to drop
-    app_columns_to_drop = ['surface_of_good']
-    df.drop(app_columns_to_drop, axis=1, inplace=True)
-    return df
-
-
-# Get the current directory
-current_dir = os.getcwd()
-
-# Define the file paths relative to the parent directory using os.path.join
-clean_huis_te_koop_path = os.path.join(current_dir, "data", "clean_house.csv")
-clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv")
-
-df_house = pd.read_csv(clean_huis_te_koop_path, sep=",")
-df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
-
-
-print("--- Data type conversions of the house and app dataset ---")
-house = dtype_conversions(df_house)
-app = dtype_conversions(df_app)
-
-# print(house.dtypes)
-# print(app.dtypes)
-
-print("--- Drop unnecessary columns ---")
-drop_unnecessary_columns(df_house)
-drop_unnecessary_columns(df_app)
-drop_unnecessary_columns_app(df_app)
-
-print(house.dtypes)
-print(app.dtypes)

@@ -12,12 +12,11 @@ from sklearn.metrics import mean_squared_error as MSE
 from preprocessing import preprocessing
 
 
-def define_X_and_y(df,prop):
+def preprocess_X(df,prop):
  
-    # Define features and target
+    # Define features
     target_column_to_drop = ['price']
     X = df.drop(columns=target_column_to_drop, axis=1)
-    y = df['price']
 
     if prop =='house':
         # Define columns to drop    
@@ -29,7 +28,7 @@ def define_X_and_y(df,prop):
         print(type(X))
 
     X = preprocessing(X)
-    return(X, y)
+    return X
 
 
 def train_model(X, y):
@@ -77,7 +76,6 @@ def train_model(X, y):
 
     print("cross val score: ", cross_val_score(model, X_train, y_train).mean())
 
-    
     return model
 
 
@@ -90,20 +88,22 @@ clean_huis_te_koop_path = os.path.join(current_dir, "data", "clean_house.csv")
 
 #____Creation pickle file for house____
 df_house = pd.read_csv(clean_huis_te_koop_path, sep=",")
-X, y = define_X_and_y(df_house, prop='house')
+y = df_house['price']
+X = preprocess_X(df_house, prop='house')
 model = train_model(X, y)
 print("For HOUSE rfr_house_model.pkl has been created")
 with open('rfr_house_model.pkl', 'wb') as file:
     pickle.dump(model, file=file)
 
 
-# _____Define relative file path for clean app input file____
-clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv")
+# # _____Define relative file path for clean app input file____
+# clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv")
 
-#____Creation pickle file for app____
-df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
-X, y = define_X_and_y(df_app, prop='app')
-model = train_model(X, y)
-print("For APP rfr_app_model.pkl has been created")
-with open('rfr_app_model.pkl', 'wb') as file:
-    pickle.dump(model, file=file)
+# #____Creation pickle file for app____
+# df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
+# y = df_house['price']
+# X = define_X_and_y(df_app, prop='app')
+# model = train_model(X, y)
+# print("For APP rfr_app_model.pkl has been created")
+# with open('rfr_app_model.pkl', 'wb') as file:
+#     pickle.dump(model, file=file)

@@ -3,10 +3,12 @@ import numpy as np
 from sklearn.impute import SimpleImputer
 
 def preprocessing(df):
-    """ imputes missing values for swimmingpool -> they get filled up with """    
+    """ imputes missing values for swimmingpool -> they get filled up with 0
+        one-hot encoding for a few categorical features"""    
+    
     # _____imputing missing values for swimmingpool____
-    # Define the imputer to replace missing values with 0.0
-    constant_imputer = SimpleImputer(missing_values=np.nan, strategy='constant', fill_value=0.0)
+    # Define the imputer to replace missing values with 0
+    constant_imputer = SimpleImputer(missing_values=np.nan, strategy='constant', fill_value=0)
     # Define the column containing missing values
     columns_with_missing_values = ['swimming_pool']
     # Impute missing values in X_train

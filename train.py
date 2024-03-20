@@ -13,6 +13,11 @@ from preprocessing import preprocessing
 
 
 def preprocess_X(df,prop):
+    """ preprocesses features for house and app
+        imputes missing values for swimmingpool -> they get filled up with 0
+        one-hot encoding for a few categorical features
+        removing columns that are not needed
+    """
  
     # Define features
     target_column_to_drop = ['price']
@@ -32,6 +37,9 @@ def preprocess_X(df,prop):
 
 
 def train_model(X, y):
+    """
+    Trains a Random Forest Regressor on the given features and target
+    """
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -82,7 +90,6 @@ def train_model(X, y):
 # _____Get the current directory_____
 current_dir = os.getcwd()
 
-
 # _____Define relative file path for clean house input file____
 clean_huis_te_koop_path = os.path.join(current_dir, "data", "clean_house.csv")
 
@@ -96,14 +103,14 @@ with open('rfr_house_model.pkl', 'wb') as file:
     pickle.dump(model, file=file)
 
 
-# # _____Define relative file path for clean app input file____
-# clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv")
+# _____Define relative file path for clean app input file____
+clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv")
 
-# #____Creation pickle file for app____
-# df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
-# y = df_house['price']
-# X = define_X_and_y(df_app, prop='app')
-# model = train_model(X, y)
-# print("For APP rfr_app_model.pkl has been created")
-# with open('rfr_app_model.pkl', 'wb') as file:
-#     pickle.dump(model, file=file)
+#____Creation pickle file for app____
+df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
+y = df_house['price']
+X = preprocess_X(df_app, prop='app')
+model = train_model(X, y)
+print("For APP rfr_app_model.pkl has been created")
+with open('rfr_app_model.pkl', 'wb') as file:
+    pickle.dump(model, file=file)

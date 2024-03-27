@@ -1,0 +1,2 @@
+property_id,locality_name,postal_code,latitude,longitude,property_type,property_subtype,price,type_of_sale,number_of_rooms,living_area,kitchen_type,fully_equipped_kitchen,furnished,open_fire,terrace,terrace_area,garden,garden_area,surface_of_good,number_of_facades,swimming_pool,state_of_building,main_city,province
+11091462,luik,4000,50.6164862,5.5663671,HOUSE,CASTLE,995000.0,BUY_REGULAR,9.0,350.0,,,,0,,,,,1315.0,4.0,0.0,TO_RENOVATE,liège,luik

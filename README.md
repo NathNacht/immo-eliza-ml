@@ -18,6 +18,8 @@ More info on the trainingdata and steps took to create the model can be found in
 
 ## 🛠 Installation
 
+#### Basic installation
+
 * clone the repo
 ```bash
 git clone git@github.com:NathNacht/immo-eliza-ml.git
@@ -44,6 +46,46 @@ For Houses
 ```bash
 $ python3 predict.py -i "data/predictions/new_house_data.csv" -o "data/predictions/house_predicted.csv" -p "house"
 ```
+
+#### Installation from refactored code (Pipelines and OrdinalEncoder)
+
+To prepare the code for deployment through an API a refactoring was done to use pipelines.
+The One-Hot encoding preprocessing step was replaced by a OrdinalEncoder but results and performance of the model in the end are the same. 
+
+Installation steps are the same as the basic installation, but different files were created for this.
+
+The pipeline itself looks like this:
+
+![alt text](image.png)
+
+* clone the repo
+```bash
+git clone git@github.com:NathNacht/immo-eliza-ml.git
+```
+
+* Install all the libraries in requirements.txt
+```bash
+pip install -r requirements.txt
+```
+
+* To train the model again, run the script (more info can be found in the MODELSCARD.md file)
+```bash
+$ python3 train_with_pipeline.py
+```
+
+* Two model .pkl files will be created (one for houses and one for apartments)
+
+* Run the script to generate predictions
+For apartments
+```bash
+$ python3 predict_with_pipeline.py -i "data/predictions/new_app_data_pipeline.csv" -o "data/predictions/app_predicted_pipeline.csv" -p "app"
+```
+For Houses
+```bash
+$ python3 predict_with_pipeline.py -i "data/predictions/new_house_data_pipeline.csv" -o "data/predictions/house_predicted_pipeline.csv" -p "house"
+```
+
+
 
 ## 👾 Preprocessing steps before training the model
 1. **Removing variables**:

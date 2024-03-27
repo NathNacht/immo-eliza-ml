@@ -1,0 +1,6 @@
+postal_code,property_subtype,number_of_rooms,living_area,kitchen_type,furnished,open_fire,terrace,terrace_area,garden,garden_area,surface_of_good,number_of_facades,swimming_pool,state_of_building,province
+6200,HOUSE,,100.0,SEMI_EQUIPPED,,1,,,,,0.0,3.0,,GOOD,henegouwen
+8310,VILLA,8.0,367.0,HYPER_EQUIPPED,,1.0,0,,1.0,735.0,1455.0,4.0,,GOOD,west-vlaanderen
+8970,HOUSE,1.0,134.0,,,,0,,,,70.0,2.0,,,west-vlaanderen
+8620,HOUSE,1.0,208.0,,,1.0,,0,,,159.0,3.0,,TO_RENOVATE,west-vlaanderen
+1070,APARTMENT_BLOCK,,274.0,INSTALLED,0.0,1.0,0.0,0,1.0,95.0,270.0,2.0,,,brussel

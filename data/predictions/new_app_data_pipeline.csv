@@ -1,0 +1,6 @@
+postal_code,property_subtype,number_of_rooms,living_area,kitchen_type,furnished,open_fire,terrace,terrace_area,garden,garden_area,number_of_facades,swimming_pool,state_of_building,province
+1210,FLAT_STUDIO,,33.0,NOT_INSTALLED,1.0,,0,1.0,6.0,,,,TO_BE_DONE_UP,brussel
+1050,APARTMENT,,59.0,USA_SEMI_EQUIPPED,1.0,0.0,0,,,,2.0,0.0,AS_NEW,brussel
+1040,APARTMENT,,216.0,INSTALLED,1.0,0.0,0,,,,3.0,0.0,AS_NEW,brussel
+
+

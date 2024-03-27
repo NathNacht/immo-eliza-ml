@@ -104,7 +104,7 @@ $ python3 predict_with_pipeline.py -i "data/predictions/new_house_data_pipeline.
 
 2. **Filling up missing values for the swimming_pool column with 0**
 
-3. **One hot encoding of categorical variables to not have empty columns:**
+3. **One hot encoding (and in the final pipeline, ordinal encoding instead) of categorical variables to not have empty columns:**
 - kitchen_type
 - state_of_the_building
 - property_subtype
@@ -126,30 +126,38 @@ When training the model again you see the scores in the terminal.
 
 ## 🤖 Project File structure
 ```
-
+├── MODELSCARD.md
+├── README.md
 ├── data
-│   ├── output
-|       ├── app_predicted.csv
-|       ├── house_predicted.csv
-|       ├── new_app_data.csv
-│       └── new_house_data.csv
 │   ├── clean_app.csv
 │   ├── clean_house.csv
+│   ├── models
+│   │   ├── rfr_app_model.pkl
+│   │   ├── rfr_app_model_with_pipeline.pkl
+│   │   ├── rfr_house_model.pkl
+│   │   └── rfr_house_model_with_pipeline.pkl
+│   ├── predictions
+│   │   ├── app_predicted.csv
+│   │   ├── app_predicted_pipeline.csv
+│   │   ├── house_predicted.csv
+│   │   ├── house_predicted_pipeline.csv
+│   │   ├── new_app_data.csv
+│   │   ├── new_app_data_pipeline.csv
+│   │   ├── new_house_data.csv
+│   │   └── new_house_data_pipeline.csv
+│   ├── properties.csv
 │   ├── properties_apartments.csv
-│   ├── properties_houses.csv
-│   └── properties.csv
+│   └── properties_houses.csv
+├── image.png
 ├── notebooks
 │   └── ....ipynb (various notebooks used to build and test the model)
-├── .gitattributes.py
-├── .gitignore
-├── MODELSCARD.md
 ├── predict.py
+├── predict_with_pipeline.py
 ├── preprocessing.py
-├── README.md
+├── preprocessing_with_pipeline.py
 ├── requirements.txt
-├── rfr_app_model.pkl
-├── rfr_house_model.pkl
-└── train.py
+├── train.py
+└── train_with_pipeline.py
 ```
 
 

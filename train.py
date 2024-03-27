@@ -98,8 +98,8 @@ df_house = pd.read_csv(clean_huis_te_koop_path, sep=",")
 y = df_house['price']
 X = preprocess_X(df_house, prop='house')
 model = train_model(X, y)
-print("For HOUSE rfr_house_model.pkl has been created")
-with open('rfr_house_model.pkl', 'wb') as file:
+print("For HOUSE rfr_house_model.pkl has been created in the model folder")
+with open('./data/models/rfr_house_model.pkl', 'wb') as file:
     pickle.dump(model, file=file)
 
 
@@ -108,9 +108,9 @@ clean_apartement_te_koop_path = os.path.join(current_dir, "data", "clean_app.csv
 
 #____Creation pickle file for app____
 df_app = pd.read_csv(clean_apartement_te_koop_path, sep=",")
-y = df_house['price']
+y = df_app['price']
 X = preprocess_X(df_app, prop='app')
 model = train_model(X, y)
-print("For APP rfr_app_model.pkl has been created")
-with open('rfr_app_model.pkl', 'wb') as file:
+print("For APARTMENTS rfr_app_model.pkl has been created in the model folder")
+with open('./data/models/rfr_app_model.pkl', 'wb') as file:
     pickle.dump(model, file=file)
